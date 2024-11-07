@@ -1,0 +1,24 @@
+.map .borders {
+	fill: none;
+	stroke: #fde293;
+	stroke-width: 3px;
+}
+
+.map .towns {
+	fill: #9dd5ac;
+	stroke: black;
+	stroke-width: 0.2px;
+	stroke-dasharray: 3, 5;
+}
+
+.map .towns:hover {
+	fill: #acdfba;
+}
+
+.map .towns.active {
+	fill: rgb(245, 190, 89);
+}
+
+.map .towns.correct {
+	fill: rgb(46, 240, 29);
+}
