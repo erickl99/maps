@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import "./main.css";
 import { feature, merge, mesh } from "topojson-client";
 import { townNames, prefectureNames } from "./names";
-import topology from "./assets/jp-towns-merged.json";
+import topology from "./assets/final.json";
 
 /** @type {HTMLDivElement}*/
 const mapDiv = document.querySelector(".map");
@@ -144,6 +144,7 @@ function main() {
 
     function selectFeature(feature) {
       selected = feature;
+      console.log(selected.properties);
       if (!correctId) mapData.selected_city = feature;
       land
         .attr(
