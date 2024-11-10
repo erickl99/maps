@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import "./main.css";
 import { feature, merge, mesh } from "topojson-client";
 import { townNames, prefectureNames } from "./names";
-import topology from "./assets/final.json";
+import topology from "./assets/town_map.json";
 
 /** @type {HTMLDivElement}*/
 const mapDiv = document.querySelector(".map");
@@ -22,7 +22,7 @@ function loadMapData() {
     const prefecture = merge(
       topology,
       dataObject.geometries.filter((d) => {
-        return d.properties.NAME_1 === name;
+        return d.properties.EN_PREF_NAME === name;
       }),
     );
     prefecture.name = name;
@@ -38,7 +38,7 @@ function loadMapData() {
     borders: mesh(
       topology,
       dataObject,
-      (a, b) => a.properties.ID_1 !== b.properties.ID_1,
+      (a, b) => a.properties.PREF_ID !== b.properties.PREF_ID,
     ),
   };
 }
@@ -102,7 +102,7 @@ function main() {
             "class",
             (d) =>
               `towns ${
-                d.properties.ID_2 === selected?.properties?.ID_2 ? "active" : ""
+                d.properties.TOWN_ID === selected?.properties?.TOWN_ID ? "active" : ""
               } ${d === correctFeature ? "correct" : ""}`,
           )
           .attr("d", path);
@@ -116,10 +116,11 @@ function main() {
     );
 
     function focusOnFeature(feature, focusedFeature = null) {
+      console.log("we are called");
       let focused = null;
       if (
         focusedFeature &&
-        feature.properties.NAME_1 !== focusedFeature?.properties?.NAME_1
+        feature.properties.EN_PREF_NAME !== focusedFeature?.properties?.EN_PREF_NAME
       ) {
         focused = {
           type: "FeatureCollection",
@@ -127,7 +128,7 @@ function main() {
         };
       } else {
         focused = prefectures.find(
-          (prefecture) => prefecture.name === feature.properties.NAME_1,
+          (prefecture) => prefecture.name === feature.properties.EN_PREF_NAME,
         );
       }
 
@@ -145,13 +146,14 @@ function main() {
     function selectFeature(feature) {
       selected = feature;
       console.log(selected.properties);
+      console.log(feature);
       if (!correctId) mapData.selected_city = feature;
       land
         .attr(
           "class",
           (d) =>
             `towns ${
-              d.properties.ID_2 === selected?.properties?.ID_2 ? "active" : ""
+              d.properties.TOWN_ID === selected?.properties?.TOWN_ID ? "active" : ""
             } ${d === correctFeature ? "correct" : ""}`,
         )
         .attr("d", path);
