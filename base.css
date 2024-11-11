@@ -22,3 +22,14 @@
 .map .towns.correct {
 	fill: rgb(46, 240, 29);
 }
+
+.pic > *,
+.map > * {
+	border: 1rem solid rgb(56, 56, 56);
+	filter: drop-shadow(0 0 0.2rem rgb(171, 171, 171));
+	height: min(50vh, 50vw);
+	width: min(50vh, 50vw);
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,13 +1,10 @@
 import * as d3 from "d3";
-import "./main.css";
 import { feature, merge, mesh } from "topojson-client";
 import { townNames, prefectureNames } from "./names";
 import topology from "./assets/town_map.json";
 
 /** @type {HTMLDivElement}*/
 const mapDiv = document.querySelector(".map");
-/** @type {HTMLButtonElement}*/
-const townButton = document.getElementById("townButton");
 /** @type {HTMLHeadingElement}*/
 const townHeader = document.querySelector("h1");
 /** @type {HTMLParagraphElement}*/
@@ -54,12 +51,6 @@ function main() {
   const projection = d3.geoMercator().precision(0.1).center([137, 38]);
   const path = d3.geoPath(projection);
   let selected = mapData.selected_city;
-
-  townButton.addEventListener("click", () => {
-    const idx = Math.round(Math.random() * townNames.length);
-    mapData.selected_city = townNames[idx];
-    townHeader.innerText = townNames[idx];
-  });
 
   function initializeMap() {
     const correctId = mapDiv.getAttribute("correct")?.split(".");
@@ -145,8 +136,7 @@ function main() {
 
     function selectFeature(feature) {
       selected = feature;
-      console.log(selected.properties);
-      console.log(feature);
+      console.log(selected, Object.getPrototypeOf(selected));
       if (!correctId) mapData.selected_city = feature;
       land
         .attr(
@@ -157,6 +147,8 @@ function main() {
             } ${d === correctFeature ? "correct" : ""}`,
         )
         .attr("d", path);
+      const name = selected.properties.JP_TOWN_NAME;
+      chosenText.innerText = `You chose: ${name}`;
     }
 
     if (correctFeature) {

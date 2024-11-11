@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Vite App</title>
-		<style>
-			body {
-				background-color: rgb(45, 41, 73);
-				max-width: 30%;
-				margin: auto;
-				text-align: center;
-			}
-
-			button {
-				margin-bottom: 0.5rem
-			}
-
-			.pic > *,
-			.map > * {
-				border: 1rem solid rgb(56, 56, 56);
-				filter: drop-shadow(0 0 0.2rem rgb(171, 171, 171));
-				height: min(50vh, 50vw);
-				width: min(50vh, 50vw);
-			}
-
-			h2 {
-				margin-bottom: 0px;
-			}
-		</style>
-	</head>
-	<body>
-		<h1></h1>
-		<button id="townButton">Choose new town</button>
-		<div class="map"></div>
-		<!-- <div class='map' correct={{ID}} disableSelection='true'></div> -->
-		<p>You chose:</p>
-		<script type="module" src="/main.js"></script>
-	</body>
+  <head>
+    <title>Japanese Towns and Cities</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <script type="module" src="/main.js" defer></script>
+  </head>
+  <body class="bg-orange-200 text-center">
+    <div id="container" class="flex">
+      <div class="flex-auto">
+        <h1></h1>
+        <div class="map flex items-center justify-center"></div>
+        <p class="text-black"></p>
+      </div>
+      <div class="flex-auto">
+        <h2>Towns</h2>
+      </div>
+    </div>
+  </body>
 </html>
